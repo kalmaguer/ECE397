@@ -1,0 +1,32 @@
+Serial.println("Configuring Sensor...."); 
+int error = bioHub.configBpm(MODE_TWO); // Configuring just the BPM settings. 
+if(!error){
+    Serial.println("Sensor configured.");
+}
+else {
+    Serial.println("Error configuring sensor.");
+    Serial.print("Error: "); 
+    Serial.println(error); 
+}
+
+
+void loop(){
+
+    // Information from the readBpm function will be saved to our "body"
+    // variable.  
+    body = bioHub.readBpm();
+    Serial.print("Heartrate: ");
+    Serial.println(body.heartRate); 
+    Serial.print("Confidence: ");
+    Serial.println(body.confidence); 
+    Serial.print("Oxygen: ");
+    Serial.println(body.oxygen); 
+    Serial.print("Status: ");
+    Serial.println(body.status); 
+    Serial.print("Extended Status: ");
+    Serial.println(body.extStatus); 
+    Serial.print("Blood Oxygen R value: ");
+    Serial.println(body.rValue); 
+    delay(250); // Slowing it down, we don't need to break our necks here.
+    
+    // https://learn.sparkfun.com/tutorials/sparkfun-pulse-oximeter-and-heart-rate-monitor-hookup-guide/introduction
